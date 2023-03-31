@@ -17,6 +17,10 @@
 - Mais interatividade
 */
 
+void strupr(char string[]){
+    for(int i = 0; i < strlen(string); i++) string[i] = toupper(string[i]);
+}
+
 void word_sort(FILE *archive, char link[], char word[]){
     bool right_lenght = false;
     srand(time(NULL));
@@ -37,9 +41,10 @@ void word_sort(FILE *archive, char link[], char word[]){
 
         if(strlen(word) == WORDLEN){
             right_lenght = true;
-            for(int i = 0; i < strlen(word); i++) word[i] = toupper(word[i]);
+            strupr(word);
         }
     }
+    printf("%s\n", word);
 }
 
 void data_validation(FILE *archive, char att[], char link[]){
@@ -68,7 +73,7 @@ void data_validation(FILE *archive, char att[], char link[]){
         printf("\n");
 
     }while(!in_dic);
-    for(int i = 0; i < strlen(att); i++) att[i] = toupper(att[i]);
+    strupr(att);
 }
 
 void print_result(char word[], char attemp[]){
@@ -133,10 +138,9 @@ void finish_game(FILE *output_arc, char link[], char word[], int n_attemps, int 
         getchar();
         fgets(player_name, MAXN, stdin);
         player_name[strlen(player_name)-1] = '\0';
-        for(int i = 0; i < strlen(player_name); i++) player_name[i] = toupper(player_name[i]);
+        strupr(player_name);
 
         output_arc = fopen(link, "a");
-
         if(NULL == output_arc){
             printf("Erro ao tentar abrir o arquivo!");
             return;
