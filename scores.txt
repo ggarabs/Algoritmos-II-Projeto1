@@ -8,3 +8,5 @@ MORRIC               FUSCA               1               5
 LUQUINHAS               MORNO               3               59              
 PEDRO               GIZAR               5               123              
 EDSON               CALOR               3               68              
+MOPA               GRAXA               1               5              
+ANDSO               MADRE               1               4              

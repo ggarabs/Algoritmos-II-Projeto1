@@ -10,13 +10,16 @@
 #define WORDLEN 5
 #define CHANCES 6
 #define DELAY_TIME 200000
+const char MSG[] = "                                            PRESS ENTER KEY TO CONTINUE\n\n\n";
 
 /* O QUE FALTA
+conio.h
+gethch();
 - Melhorar interface
-- Jogabilidade (tempo de pausa)
 - Mais interatividade
-- MENU INICIAL (Digite enter para começar/finalizar) e limpar a tela
-- Limitar saída com número de letras
+- MENU INICIAL (Digite enter para começar/finalizar)
+- Fazer piscar a mensagem
+ - Header no jogo
 */
 
 void show_logo(){
@@ -37,6 +40,12 @@ void show_logo(){
     }
 
     fclose(aux_arc);
+}
+
+void wait_start(){
+    printf(MSG);
+    getchar();
+    system("clear");
 }
 
 void strupr(char string[]){
@@ -66,6 +75,7 @@ void word_sort(FILE *archive, char link[], char word[]){
             strupr(word);
         }
     }
+    printf("%s\n", word);
 }
 
 void data_validation(FILE *archive, char att[], char link[]){
@@ -140,6 +150,8 @@ int make_attemp(FILE *archive, char link[], char word[]){
         data_validation(archive, attemp, link);
         usleep(3*DELAY_TIME);
 
+        system("clear");
+
         print_result(word, attemp);
         usleep(3*DELAY_TIME);
 
@@ -148,6 +160,27 @@ int make_attemp(FILE *archive, char link[], char word[]){
         }
     }
     return 0;
+}
+
+void name_validation(char name[]){
+    bool right_lenght = false;
+    do{
+        printf("Digite seu nick com cinco letras: ");
+        getchar();
+        scanf("%s", name);
+
+        right_lenght = strlen(name) == WORDLEN;
+
+        if(!right_lenght){
+            printf("Nick com tamanho inválido!\n");
+            usleep(3*DELAY_TIME);
+        }
+
+        printf("\n");
+
+    }while(!right_lenght);
+    
+    strupr(name);
 }
 
 void finish_game(FILE *output_arc, char link[], char word[], int n_attemps, int time){
@@ -160,11 +193,7 @@ void finish_game(FILE *output_arc, char link[], char word[], int n_attemps, int 
 
         char player_name[MAXN], std_space[] = "              ";
 
-        printf("Digite seu nome: ");
-        getchar();
-        fgets(player_name, MAXN, stdin);
-        player_name[strlen(player_name)-1] = '\0';
-        strupr(player_name);
+        name_validation(player_name);
 
         output_arc = fopen(link, "a");
         if(NULL == output_arc){
@@ -185,6 +214,7 @@ int main(){
     time_t start, end;
 
     show_logo();
+    wait_start();
 
     word_sort(arc, input_adress, drawn_word);
 
