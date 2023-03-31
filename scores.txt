@@ -1,2 +1,3 @@
 Nome                Palavra             Tentativas        Tempo(em segundos)
 Floyd               haste               5               181              
+STEVEN              POMBO               5               371              

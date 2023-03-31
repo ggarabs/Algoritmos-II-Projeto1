@@ -3,10 +3,19 @@
 #include <time.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <ctype.h>
+
 #define MAXN 200
 #define TAM 6621
 #define WORDLEN 5
 #define CHANCES 6
+
+/* O QUE FALTA
+- Melhorar interface
+- Gerar função que coloca tudo caixa alta
+- Jogabilidade (tempo de pausa)
+- Mais interatividade
+*/
 
 void word_sort(FILE *archive, char link[], char word[]){
     bool right_lenght = false;
@@ -28,7 +37,7 @@ void word_sort(FILE *archive, char link[], char word[]){
 
         if(strlen(word) == WORDLEN){
             right_lenght = true;
-//            strupr(word);
+            for(int i = 0; i < strlen(word); i++) word[i] = toupper(word[i]);
         }
     }
 }
@@ -59,7 +68,7 @@ void data_validation(FILE *archive, char att[], char link[]){
         printf("\n");
 
     }while(!in_dic);
-//    strupr(att);
+    for(int i = 0; i < strlen(att); i++) att[i] = toupper(att[i]);
 }
 
 void print_result(char word[], char attemp[]){
@@ -124,7 +133,7 @@ void finish_game(FILE *output_arc, char link[], char word[], int n_attemps, int 
         getchar();
         fgets(player_name, MAXN, stdin);
         player_name[strlen(player_name)-1] = '\0';
-//        strupr(player_name);
+        for(int i = 0; i < strlen(player_name); i++) player_name[i] = toupper(player_name[i]);
 
         output_arc = fopen(link, "a");
 
