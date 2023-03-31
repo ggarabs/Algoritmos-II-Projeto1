@@ -1,0 +1,2 @@
+Nome                Palavra             Tentativas        Tempo(em segundos)
+Floyd               haste               5               181              
