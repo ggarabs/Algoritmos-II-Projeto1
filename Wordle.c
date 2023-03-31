@@ -9,13 +9,35 @@
 #define TAM 6621
 #define WORDLEN 5
 #define CHANCES 6
+#define DELAY_TIME 200000
 
 /* O QUE FALTA
 - Melhorar interface
-- Gerar função que coloca tudo caixa alta
 - Jogabilidade (tempo de pausa)
 - Mais interatividade
+- MENU INICIAL (Digite enter para começar/finalizar) e limpar a tela
+- Limitar saída com número de letras
 */
+
+void show_logo(){
+    FILE *aux_arc;
+    const char adress[] = "logo.txt";
+    aux_arc = fopen(adress, "r");
+
+    if(NULL == aux_arc){
+        return;
+    }
+
+    while(!feof(aux_arc)){
+        char line[200];
+        if(NULL != fgets(line, MAXN, aux_arc)){
+            printf("%s", line);
+            usleep(DELAY_TIME);
+        }
+    }
+
+    fclose(aux_arc);
+}
 
 void strupr(char string[]){
     for(int i = 0; i < strlen(string); i++) string[i] = toupper(string[i]);
@@ -44,7 +66,6 @@ void word_sort(FILE *archive, char link[], char word[]){
             strupr(word);
         }
     }
-    printf("%s\n", word);
 }
 
 void data_validation(FILE *archive, char att[], char link[]){
@@ -68,7 +89,10 @@ void data_validation(FILE *archive, char att[], char link[]){
             if(strcmp(line, att) == 0 && strlen(att) == WORDLEN) in_dic = true;
         }
 
-        if(!in_dic) printf("Palavra de tamanho inválido ou não encontrada na base de dados.\n");
+        if(!in_dic){
+            printf("Palavra de tamanho inválido ou não encontrada na base de dados.\n");
+            usleep(3*DELAY_TIME);
+        }
 
         printf("\n");
 
@@ -114,8 +138,10 @@ int make_attemp(FILE *archive, char link[], char word[]){
         char attemp[MAXN];
 
         data_validation(archive, attemp, link);
+        usleep(3*DELAY_TIME);
 
         print_result(word, attemp);
+        usleep(3*DELAY_TIME);
 
         if(strcmp(attemp, word) == 0){
             return i;
@@ -157,6 +183,8 @@ int main(){
     char input_adress[] = "palavras.txt", output_adress[] = "scores.txt";
     char drawn_word[MAXN];
     time_t start, end;
+
+    show_logo();
 
     word_sort(arc, input_adress, drawn_word);
 
