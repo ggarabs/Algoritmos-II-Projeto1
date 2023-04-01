@@ -10,3 +10,4 @@ PEDRO               GIZAR               5               123
 EDSON               CALOR               3               68              
 MOPA               GRAXA               1               5              
 ANDSO               MADRE               1               4              
+MARIG               LAPSO               6               107              

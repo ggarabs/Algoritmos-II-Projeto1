@@ -19,7 +19,8 @@ gethch();
 - Mais interatividade
 - MENU INICIAL (Digite enter para começar/finalizar)
 - Fazer piscar a mensagem
- - Header no jogo
+- Header no jogo
+- BUG: entra caixa alta e o programa nao identifica
 */
 
 void show_logo(){
