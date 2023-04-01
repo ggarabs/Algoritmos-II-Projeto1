@@ -1,14 +1,6 @@
 Nome               Palavra          Tentativas      Tempo(em segundos)
-Floyd               haste               5               181              
-STEVEN              POMBO               5               371              
-ROBERTO             SEITA               6               206              
-GUSTAVO             BOATE               1               5              
-JULIAN               REGAR               1               3              
-MORRIC               FUSCA               1               5              
-LUQUINHAS               MORNO               3               59              
 PEDRO               GIZAR               5               123              
 EDSON               CALOR               3               68              
-MOPA               GRAXA               1               5              
 ANDSO               MADRE               1               4              
 MARIG               LAPSO               6               107              
 RIVEL               GATAR               1               7              
@@ -21,3 +13,5 @@ PILEH               MEXER               5               399
 SIGMA               PODRE               6               192              
 ERICH               LETAL               4               79              
 ANGEL               CHECO               5               432              
+GABRI               RISCO               2               97              
+GUSTG               JARRO               5               72

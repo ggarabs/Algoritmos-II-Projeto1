@@ -11,15 +11,16 @@
 #define WORDLEN 5
 #define CHANCES 6
 #define DELAY_TIME 200000
-const char MSG[] = "                                            PRESS ENTER KEY TO CONTINUE\n\n\n";
 
 /* O QUE FALTA
 - MENU INICIAL (Digite enter para começar/finalizar)
 - Header no jogo
+- "A PALAVRA ESTA SENDO GERADA! ESPERE UNS INSTANTES
+PALAVRA SORTEADA! BOM JOGO!" // Algo assim
+- MENU FINAL + OPÇ~AO DE VER SCORES
 */
 
 void wait_start(){
-    printf(MSG);
     getchar();
     system("clear");
 }
@@ -201,7 +202,7 @@ void finish_game(FILE *output_arc, char link[], char word[], int n_attemps, int 
             return;
         }
 
-        fprintf(output_arc, "%s%s %s%s %d%s %d%s\n", player_name, std_space, word, std_space, n_attemps, std_space, time, std_space);
+        fprintf(output_arc, "%s%s %s%s %d%s %d\n", player_name, std_space, word, std_space, n_attemps, std_space, time);
 
         fclose(output_arc);
     }
