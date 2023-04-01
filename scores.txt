@@ -11,3 +11,13 @@ EDSON               CALOR               3               68
 MOPA               GRAXA               1               5              
 ANDSO               MADRE               1               4              
 MARIG               LAPSO               6               107              
+RIVEL               GATAR               1               7              
+LERDO               LESMA               1               7              
+NICKE               UIVAR               1               9              
+DOLFO               GERIR               2               356              
+MARIA               MARIA               4               119              
+MARCO               FOSSO               6               183              
+PILEH               MEXER               5               399              
+SIGMA               PODRE               6               192              
+ERICH               LETAL               4               79              
+ANGEL               CHECO               5               432              

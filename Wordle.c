@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <unistd.h>
 
 #define MAXN 200
 #define TAM 6621
@@ -13,15 +14,15 @@
 const char MSG[] = "                                            PRESS ENTER KEY TO CONTINUE\n\n\n";
 
 /* O QUE FALTA
-conio.h
-gethch();
-- Melhorar interface
-- Mais interatividade
 - MENU INICIAL (Digite enter para começar/finalizar)
-- Fazer piscar a mensagem
 - Header no jogo
-- BUG: entra caixa alta e o programa nao identifica
 */
+
+void wait_start(){
+    printf(MSG);
+    getchar();
+    system("clear");
+}
 
 void show_logo(){
     FILE *aux_arc;
@@ -39,18 +40,16 @@ void show_logo(){
             usleep(DELAY_TIME);
         }
     }
-
     fclose(aux_arc);
-}
-
-void wait_start(){
-    printf(MSG);
-    getchar();
-    system("clear");
+    wait_start();
 }
 
 void strupr(char string[]){
     for(int i = 0; i < strlen(string); i++) string[i] = toupper(string[i]);
+}
+
+void strlwr(char string[]){
+    for(int i = 0; i < strlen(string); i++) string[i] = tolower(string[i]);
 }
 
 void word_sort(FILE *archive, char link[], char word[]){
@@ -73,10 +72,10 @@ void word_sort(FILE *archive, char link[], char word[]){
 
         if(strlen(word) == WORDLEN){
             right_lenght = true;
-            strupr(word);
         }
     }
-    printf("%s\n", word);
+    strupr(word);
+//    printf("%s\n", word);
 }
 
 void data_validation(FILE *archive, char att[], char link[]){
@@ -85,6 +84,7 @@ void data_validation(FILE *archive, char att[], char link[]){
     do{
         printf("Digite uma palavra de cinco letras: ");
         scanf("%s", att);
+        strlwr(att);
 
         char line[MAXN];
 
@@ -111,14 +111,14 @@ void data_validation(FILE *archive, char att[], char link[]){
     strupr(att);
 }
 
-void print_result(char word[], char attemp[]){
+void print_result(char word[], char attemp[], char hist[]){
+    strcat(hist, attemp);
     printf("+-----------+\n| ");
 
-    for(int j = 0; j < strlen(attemp); j++){
-        printf("%c ", attemp[j]);
+    for(int j = 0; j < strlen(hist); j++){
+        printf("%c ", hist[j]);
+        if(j % 5 == 4) printf("|\n| ");
     }
-
-    printf("|\n| ");
 
     char ans[] = "xxxxx", old[] = "xxxxx";
 
@@ -136,6 +136,8 @@ void print_result(char word[], char attemp[]){
         }
     }
 
+    strcat(hist, ans);
+
     for(int j = 0; j < WORDLEN; j++){
         printf("%c ", ans[j]);
     }
@@ -143,7 +145,7 @@ void print_result(char word[], char attemp[]){
     printf("|\n+-----------+\n\n");
 }
 
-int make_attemp(FILE *archive, char link[], char word[]){
+int make_attemp(FILE *archive, char link[], char word[], char hist[]){
     for(int i = 1; i <= CHANCES; i++){
         printf("%dª Tentativa\n", i);
         char attemp[MAXN];
@@ -153,12 +155,10 @@ int make_attemp(FILE *archive, char link[], char word[]){
 
         system("clear");
 
-        print_result(word, attemp);
+        print_result(word, attemp, hist);
         usleep(3*DELAY_TIME);
 
-        if(strcmp(attemp, word) == 0){
-            return i;
-        }
+        if(strcmp(attemp, word) == 0) return i;
     }
     return 0;
 }
@@ -170,7 +170,7 @@ void name_validation(char name[]){
         getchar();
         scanf("%s", name);
 
-        right_lenght = strlen(name) == WORDLEN;
+        right_lenght = (strlen(name) == WORDLEN);
 
         if(!right_lenght){
             printf("Nick com tamanho inválido!\n");
@@ -180,7 +180,6 @@ void name_validation(char name[]){
         printf("\n");
 
     }while(!right_lenght);
-    
     strupr(name);
 }
 
@@ -211,17 +210,16 @@ void finish_game(FILE *output_arc, char link[], char word[], int n_attemps, int 
 int main(){
     FILE *arc, *output_arc;
     char input_adress[] = "palavras.txt", output_adress[] = "scores.txt";
-    char drawn_word[MAXN];
+    char drawn_word[MAXN], hist[MAXN] = "";
     time_t start, end;
 
     show_logo();
-    wait_start();
 
     word_sort(arc, input_adress, drawn_word);
 
     start = time(NULL);
 
-    int got_word = make_attemp(arc, input_adress, drawn_word);
+    int got_word = make_attemp(arc, input_adress, drawn_word, hist);
 
     int play_time = time(NULL) - start;
 
