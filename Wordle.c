@@ -13,7 +13,7 @@
 #define DELAY_TIME 200000
 
 /* O QUE FALTA
-- MENU INICIAL (Digite enter para começar/finalizar)
+- MENU INICIAL (Digite enter para começar)
 - Header no jogo
 - "A PALAVRA ESTA SENDO GERADA! ESPERE UNS INSTANTES
 PALAVRA SORTEADA! BOM JOGO!" // Algo assim
