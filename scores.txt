@@ -23,3 +23,6 @@ BBJSK               MAORI               4               162
 LATAM               CORAR               6               72
 DIOGO               MULTA               6               113
 LINDO               PICAR               3               53
+ANGEL               FILME               6               129
+ANDSO               SUTIL               5               104
+JOAOR               GRIFO               4               63
